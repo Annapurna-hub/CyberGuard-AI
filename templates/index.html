@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cyber Risk Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background: rgba(0,0,0,0.6);
+            padding: 30px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #00c6ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: #00c6ff;
+        }
+
+        .safe {
+            color: #00ff99;
+        }
+
+        .danger {
+            color: #ff4d4d;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔐 Cyber Security Risk Dashboard</h1>
+
+        <form method="POST">
+            <button type="submit">Run Assessment</button>
+        </form>
+
+        {% if prediction %}
+            <h2 class="{{ 'safe' if prediction == 'Safe' else 'danger' }}">
+                Result: {{ prediction }}
+            </h2>
+        {% endif %}
+
+        {% if threats %}
+            <h3>⚠️ Detected Threats:</h3>
+            <ul>
+                {% for threat in threats %}
+                    <li>{{ threat }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if suggestions %}
+            <h3>🛡️ Recommendations:</h3>
+            <ul>
+                {% for s in suggestions %}
+                    <li>{{ s }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CyberGuard AI - Results</title>
+
+<style>
+
+body{
+    background:#1c2331;
+    color:white;
+    font-family:'Segoe UI',sans-serif;
+    padding:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:#2b3446;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+h1{
+    color:#d4a017;
+    text-align:center;
+}
+
+.score{
+    font-size:60px;
+    text-align:center;
+    color:#d4a017;
+}
+
+.graph-bar{
+    height:30px;
+    background:#444;
+    border-radius:10px;
+    margin:10px 0;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:#d4a017;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+
+    <a href="/assessment" style="
+    background:#2ecc71;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    ">
+        ← New Assessment
+    </a>
+
+    <a href="/history" style="
+    background:#3498db;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    ">
+        📜 View History
+    </a>
+
+</div>
+
+<h1>🛡 Cyber Risk Assessment Result</h1>
+
+<div class="card">
+
+<div class="score">
+
+{% if risk_level == "LOW" %}
+<span style="color:#28a745;">
+{{ risk_score }}%
+</span>
+
+{% elif risk_level == "MEDIUM" %}
+<span style="color:#ffc107;">
+{{ risk_score }}%
+</span>
+
+{% else %}
+<span style="color:#dc3545;">
+{{ risk_score }}%
+</span>
+{% endif %}
+
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+
+{% if risk_level == "LOW" %}
+<span style="
+background:#28a745;
+padding:10px 25px;
+border-radius:30px;
+font-weight:bold;
+font-size:20px;">
+🟢 LOW RISK
+</span>
+
+{% elif risk_level == "MEDIUM" %}
+<span style="
+background:#ffc107;
+color:black;
+padding:10px 25px;
+border-radius:30px;
+font-weight:bold;
+font-size:20px;">
+🟡 MEDIUM RISK
+</span>
+
+{% else %}
+<span style="
+background:#dc3545;
+padding:10px 25px;
+border-radius:30px;
+font-weight:bold;
+font-size:20px;">
+🔴 HIGH RISK
+</span>
+{% endif %}
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📊Threat Analysis</h2>
+
+<p>{{ threat1 }}</p>
+<div class="graph-bar">
+<div class="fill"
+style="
+width:{{ phishing }}%;
+background:{{ phishing_color }};
+">
+</div>
+</div>
+
+<p>{{ threat2 }}</p>
+<div class="graph-bar">
+<div class="fill"
+style="
+width:{{ ddos }}%;
+background:{{ ddos_color }};
+">
+</div>
+</div>
+
+<p>{{ threat3 }}</p>
+<div class="graph-bar">
+<div class="fill"
+style="
+width:{{ data_leak }}%;
+background:{{ data_leak_color }};
+">
+</div>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Recommendations</h2>
+
+{% for item in recommendations %}
+
+<div style="
+background:#1f2738;
+padding:15px;
+margin-top:12px;
+border-left:5px solid #d4a017;
+border-radius:10px;
+font-size:16px;
+">
+
+🛡 {{ item }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="card">
+
+<h2>📉Risk After Fixes</h2>
+
+<h3>{{ reduced_risk }}%</h3>
+
+</div>
+
+</div>
+
+</body>
+</html>

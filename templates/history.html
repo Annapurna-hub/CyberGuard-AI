@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assessment History</title>
+
+<style>
+
+body{
+    background:#1c2331;
+    color:white;
+    font-family:'Segoe UI',sans-serif;
+    padding:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:#2b3446;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+
+}
+
+h1{
+    text-align:center;
+    color:#d4a017;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📜 Assessment History</h1>
+<div style="margin-bottom:20px;">
+
+<a href="/assessment" style="
+background:#2ecc71;
+color:white;
+text-decoration:none;
+padding:10px 20px;
+border-radius:8px;
+font-weight:bold;
+">
+
+← New Assessment
+
+</a>
+
+</div>
+
+{% for item in assessments %}
+
+<div class="card">
+
+<h2 style="color:#d4a017;">
+🖥 {{ item[2] }}
+</h2>
+
+<p>
+<strong>Risk Score:</strong>
+{{ item[3] }}%
+</p>
+
+<p>
+<strong>Risk Level:</strong>
+{{ item[4] }}
+</p>
+
+<form action="/delete/{{ item[0] }}" method="POST">
+
+<button style="
+background:#dc3545;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+">
+
+🗑 Delete
+
+</button>
+
+</form>
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
